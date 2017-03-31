@@ -1,67 +1,67 @@
 class Dice
-  def initialize(n, s, e, w, t, b)
-    $north = n
-    $south = s
-    $east = e
-    $west = w
+  def initialize(f, ba, r, l, t, bo)
+    $front = f
+    $back = ba
+    $right = r
+    $left = l
     $top = t
-    $bottom = b
+    $bottom = bo
   end
 
-  def move_north
-    north = $north
-    south = $south
+  def move_front
+    front = $front
+    back = $back
     top = $top
     bottom = $bottom
-    $north = top
-    $top = south
-    $bottom = north
-    $south = bottom
+    $front = top
+    $top = back
+    $bottom = front
+    $back = bottom
   end
 
-  def move_south
-    north = $north
-    south = $south
+  def move_back
+    front = $front
+    back = $back
     top = $top
     bottom = $bottom
-    $south = top
-    $bottom = south
-    $north = bottom
-    $top = north
+    $back = top
+    $bottom = back
+    $front = bottom
+    $top = front
   end
 
-  def move_east
+  def move_right
     top = $top
     bottom = $bottom
-    east = $east
-    west = $west
-    $east = top
-    $bottom = east
-    $west = bottom
-    $top = west
+    right = $right
+    left = $left
+    $right = top
+    $bottom = right
+    $left = bottom
+    $top = left
   end
 
-  def move_west
+  def move_left
     top = $top
     bottom = $bottom
-    east = $east
-    west = $west
-    $west = top
-    $bottom = west
-    $east = bottom
-    $top = east
+    right = $right
+    left = $left
+    $left = top
+    $bottom = left
+    $right = bottom
+    $top = right
   end
 
   def execute_orders(orders)
     orders.each do |order|
       if order == "N"
-        move_north
+        move_front
       elsif order == "S"
-        move_south
+        move_back
       elsif order == "E"
-        move_east
+        move_right
       elsif order == "W"
-        move_west
+        move_left
       else
         puts "error!"
       end
@@ -71,11 +71,11 @@ end
 
 dice_number = gets.chomp.split.map(&:to_i)
 t = dice_number[0]
-s = dice_number[1]
-e = dice_number[2]
-w = dice_number[3]
-n = dice_number[4]
-b = dice_number[5]
+ba = dice_number[1]
+r = dice_number[2]
+l = dice_number[3]
+f = dice_number[4]
+bo = dice_number[5]
 input_orders = gets.chomp.to_s
 orders = []
 size = input_orders.size
@@ -83,6 +83,6 @@ for i in 0...size
   orders << input_orders[i]
 end
 
-dice = Dice.new(n, s, e, w, t, b)
+dice = Dice.new(f, ba, r, l, t, bo)
 dice.execute_orders(orders)
 puts $top
