@@ -1,55 +1,11 @@
 class Dice
-  def initialize(f, ba, r, l, t, bo)
-    $front = f
-    $back = ba
-    $right = r
-    $left = l
-    $top = t
-    $bottom = bo
-  end
-
-  def move_front
-    front = $front
-    back = $back
-    top = $top
-    bottom = $bottom
-    $front = top
-    $top = back
-    $bottom = front
-    $back = bottom
-  end
-
-  def move_back
-    front = $front
-    back = $back
-    top = $top
-    bottom = $bottom
-    $back = top
-    $bottom = back
-    $front = bottom
-    $top = front
-  end
-
-  def move_right
-    top = $top
-    bottom = $bottom
-    right = $right
-    left = $left
-    $right = top
-    $bottom = right
-    $left = bottom
-    $top = left
-  end
-
-  def move_left
-    top = $top
-    bottom = $bottom
-    right = $right
-    left = $left
-    $left = top
-    $bottom = left
-    $right = bottom
-    $top = right
+  def initialize(front, back, right, left, top, bottom)
+    $front = front
+    $back = back
+    $right = right
+    $left = left
+    $top = top
+    $bottom = bottom
   end
 
   def execute_orders(orders)
@@ -67,15 +23,48 @@ class Dice
       end
     end
   end
+
+  private
+  def move_front
+    tmp = $top
+    $top = $back
+    $back = $bottom
+    $bottom = $front
+    $front = tmp
+  end
+
+  def move_back
+    tmp = $back
+    $back = $top
+    $top = $front
+    $front = $bottom
+    $bottom = tmp
+  end
+
+  def move_right
+    tmp = $right
+    $right = $top
+    $top = $left
+    $left = $bottom
+    $bottom = tmp
+  end
+
+  def move_left
+    tmp = $left
+    $left = $top
+    $top = $right
+    $right = $bottom
+    $bottom = tmp
+  end
 end
 
 dice_number = gets.chomp.split.map(&:to_i)
-t = dice_number[0]
-ba = dice_number[1]
-r = dice_number[2]
-l = dice_number[3]
-f = dice_number[4]
-bo = dice_number[5]
+top = dice_number[0]
+back = dice_number[1]
+right = dice_number[2]
+left = dice_number[3]
+front = dice_number[4]
+bottom = dice_number[5]
 input_orders = gets.chomp.to_s
 orders = []
 size = input_orders.size
@@ -83,6 +72,6 @@ for i in 0...size
   orders << input_orders[i]
 end
 
-dice = Dice.new(f, ba, r, l, t, bo)
+dice = Dice.new(front, back, right, left, top, bottom)
 dice.execute_orders(orders)
 puts $top

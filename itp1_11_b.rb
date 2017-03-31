@@ -1,100 +1,86 @@
 class Dice
-  def initialize(f, ba, r, l, t, bo)
-    $front = f
-    $back = ba
-    $right = r
-    $left = l
-    $top = t
-    $bottom = bo
+  def initialize(front, back, right, left, top, bottom)
+    $front = front
+    $back = back
+    $right = right
+    $left = left
+    $top = top
+    $bottom = bottom
   end
 
-  def move_front
-    front = $front
-    back = $back
-    top = $top
-    bottom = $bottom
-    $front = top
-    $top = back
-    $bottom = front
-    $back = bottom
-  end
-
-  def move_back
-    front = $front
-    back = $back
-    top = $top
-    bottom = $bottom
-    $back = top
-    $bottom = back
-    $front = bottom
-    $top = front
-  end
-
-  def move_right
-    top = $top
-    bottom = $bottom
-    right = $right
-    left = $left
-    $right = top
-    $bottom = right
-    $left = bottom
-    $top = left
-  end
-
-  def move_left
-    top = $top
-    bottom = $bottom
-    right = $right
-    left = $left
-    $left = top
-    $bottom = left
-    $right = bottom
-    $top = right
-  end
-
-  def execute_orders(orders)
-    length = orders.length
-    for i in 0...length
-      if orders[i] == "N"
-        move_front
-      elsif orders[i] == "S"
-        move_back
-      elsif orders[i] == "E"
-        move_right
-      elsif orders[i] == "W"
-        move_left
-      else
-        puts "error!"
-      end
-    end
-  end
-
-  def find_back_by_fr(order_f, order_r)
+  def find_back_by_fr(order_front, Dorder_right)
     loop do
       tmp = execute_orders(["N", "S", "E", "W"].sample)
-      if $top == order_f && $back == order_r
+      if $top == order_front && $back == order_right
         break
       end
     end
     return $right
   end
+
+  private
+  def move_front
+    tmp = $top
+    $top = $back
+    $back = $bottom
+    $bottom = $front
+    $front = tmp
+  end
+
+  def move_back
+    tmp = $back
+    $back = $top
+    $top = $front
+    $front = $bottom
+    $bottom = tmp
+  end
+
+  def move_right
+    tmp = $right
+    $right = $top
+    $top = $left
+    $left = $bottom
+    $bottom = tmp
+  end
+
+  def move_left
+    tmp = $left
+    $left = $top
+    $top = $right
+    $right = $bottom
+    $bottom = tmp
+  end
+
+  def execute_orders(order)
+      if order == "N"
+        move_front
+      elsif order == "S"
+        move_back
+      elsif order == "E"
+        move_right
+      elsif order == "W"
+        move_left
+      else
+        puts "error!"
+      end
+  end
 end
 
 dice_number = gets.chomp.split.map(&:to_i)
-t = dice_number[0]
-ba = dice_number[1]
-r = dice_number[2]
-l = dice_number[3]
-f = dice_number[4]
-bo = dice_number[5]
+top = dice_number[0]
+back = dice_number[1]
+right = dice_number[2]
+left = dice_number[3]
+front = dice_number[4]
+bottom = dice_number[5]
 num = gets.chomp.to_i
 answers = []
 num.times do
   input_fr = gets.chomp.split.map(&:to_i)
-  order_f = input_fr[0]
-  order_r = input_fr[1]
-  dice = Dice.new(f, ba, r, l, t, bo)
-  answers << dice.find_back_by_fr(order_f, order_r)
+  order_front = input_fr[0]
+  order_right = input_fr[1]
+  dice = Dice.new(front, back, right, left, top, bottom)
+  answers << dice.find_back_by_fr(order_front, order_right)
 end
 answers.each do |i|
   puts i

@@ -1,82 +1,66 @@
 class Dice
-  def initialize(t, ba, r, l, f, bo)
-    $front = f
-    $back = ba
-    $right = r
-    $left = l
-    $top = t
-    $bottom = bo
+  def initialize(top, back, right, left, front, bottom)
+    $front = front
+    $back = back
+    $right = right
+    $left = left
+    $top = top
+    $bottom = bottom
   end
 
-  def execute_orders(orders)
-    length = orders.length
-    for i in 0...length
-      if orders[i] == "N"
-        move_front
-      elsif orders[i] == "S"
-        move_back
-      elsif orders[i] == "E"
-        move_right
-      elsif orders[i] == "W"
-        move_left
-      else
-        puts "error!"
-      end
-    end
-  end
-
-  def check_dices_same(order_t, order_ba, order_r, order_l, order_f, order_bo)
+  def check_dices_same(order_top, order_back, order_right, order_left, order_front, order_bottom)
       100.times do
         execute_orders(["N", "W"].sample)
-        return true if $top == order_t && $back == order_ba && $right == order_r && $left == order_l && $front == order_f && $bottom == order_bo
+        return true if $top == order_top && $back == order_back && $right == order_r && $left == order_left && $front == order_front && $bottom == order_bottom
       end
     return false
   end
 
-
   private
   def move_front
-    front = $front
-    back = $back
-    top = $top
-    bottom = $bottom
-    $front = top
-    $top = back
-    $bottom = front
-    $back = bottom
+    tmp = $top
+    $top = $back
+    $back = $bottom
+    $bottom = $front
+    $front = tmp
   end
 
   def move_back
-    front = $front
-    back = $back
-    top = $top
-    bottom = $bottom
-    $back = top
-    $bottom = back
-    $front = bottom
-    $top = front
+    tmp = $back
+    $back = $top
+    $top = $front
+    $front = $bottom
+    $bottom = tmp
   end
 
   def move_right
-    top = $top
-    bottom = $bottom
-    right = $right
-    left = $left
-    $right = top
-    $bottom = right
-    $left = bottom
-    $top = left
+    tmp = $right
+    $right = $top
+    $top = $left
+    $left = $bottom
+    $bottom = tmp
   end
 
   def move_left
-    top = $top
-    bottom = $bottom
-    right = $right
-    left = $left
-    $left = top
-    $bottom = left
-    $right = bottom
-    $top = right
+    tmp = $left
+    $left = $top
+    $top = $right
+    $right = $bottom
+    $bottom = tmp
+  end
+
+  def execute_orders(order)
+      if order == "N"
+        move_front
+      elsif order == "S"
+        move_back
+      elsif order == "E"
+        move_right
+      elsif order == "W"
+        move_left
+      else
+        puts "error!"
+      end
   end
 end
 
