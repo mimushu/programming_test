@@ -1,7 +1,0 @@
-Event Date	Event	App Name	App Apple ID	Subscription Name	Subscription Apple ID	Subscription Group ID	Subscription Duration	Trial	Trial Duration	Marketing Opt-In	Marketing Opt-In Duration	Preserved Pricing	Proceeds Reason	Consecutive Paid Periods	Original Start Date	Client	Device	State	Country	Previous Subscription Name	Previous Subscription Apple ID	Days Before Canceling	Cancellation Reason	Days Canceled	Quantity
-2017-03-02	Cancel	英単語アプリ mikan	920856839	mikan Pro	1183277511	20365307	1 Month		 		 			1	2017-02-02		iPhone	鳥取県	JPN				Billing issue		1
-2017-03-03	Renew	英単語アプリ mikan	920856839	mikan Pro	1183277511	20365307	1 Month		 		 			2	2017-02-03		iPod touch	愛媛県	JPN						1
-2017-03-02	Subscribe	英単語アプリ mikan	920856839	mikan Pro	1183277511	20365307	1 Month		 		 			1	2017-03-02		iPhone	愛知県	JPN						1
-2017-03-02	Subscribe	英単語アプリ mikan	920856839	mikan Pro	1183277511	20365307	1 Month		 		 			1	2017-03-02		iPhone	東京都	JPN						1
-2017-03-02	Renew	英単語アプリ mikan	920856839	mikan Pro	1183277511	20365307	1 Month		 		 			2	2017-02-02		iPhone	東京都	JPN						1
-2017-03-02	Cancel	英単語アプリ mikan	920856839	mikan Pro	1183277511	20365307	1 Month		 		 			1	2017-02-02		iPhone	岡山県	JPN			0	Canceled		1
