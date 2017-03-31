@@ -80,31 +80,11 @@ class Dice
   end
 end
 
-n = gets.chomp.to_i
-dices = []
-n.times do
-  dice = gets.chomp.split.map(&:to_i)
-  dices << dice
-end
-flag = 0
-for i in 0...n-1
-  dice = Dice.new(dices[i][0], dices[i][1], dices[i][2], dices[i][3], dices[i][4], dices[i][5])
-  for j in i+1...n
-    if dice.check_dices_same(dices[j][0], dices[j][1], dices[j][2], dices[j][3], dices[j][4], dices[j][5])
-      puts "No"
-      flag += 1
-      break
-    end
-  end
-  if flag == 1
-    break
-  end
-  if dice.check_dices_same(dices[n-1][0], dices[n-1][1], dices[n-1][2], dices[n-1][3], dices[n-1][4], dices[n-1][5])
-    puts "No"
-    flag += 1
-    break
-  end
-end
-if flag == 0
+d1 = gets.chomp.split.map(&:to_i)
+d2 = gets.chomp.split.map(&:to_i)
+dice1 = Dice.new(d1[0], d1[1], d1[2], d1[3], d1[4], d1[5])
+if dice1.check_dices_same(d2[0], d2[1], d2[2], d2[3], d2[4], d2[5])
   puts "Yes"
+else
+  puts "No"
 end
