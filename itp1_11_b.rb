@@ -1,101 +1,86 @@
 class Dice
-  def initialize(n, s, e, w, t, b)
-    $north = n
-    $south = s
-    $east = e
-    $west = w
-    $top = t
-    $bottom = b
+  def initialize(front, back, right, left, top, bottom)
+    $front = front
+    $back = back
+    $right = right
+    $left = left
+    $top = top
+    $bottom = bottom
   end
 
-  def move_north
-    north = $north
-    south = $south
-    top = $top
-    bottom = $bottom
-    $north = top
-    $top = south
-    $bottom = north
-    $south = bottom
-  end
-
-  def move_south
-    north = $north
-    south = $south
-    top = $top
-    bottom = $bottom
-    $south = top
-    $bottom = south
-    $north = bottom
-    $top = north
-  end
-
-  def move_east
-    top = $top
-    bottom = $bottom
-    east = $east
-    west = $west
-    $east = top
-    $bottom = east
-    $west = bottom
-    $top = west
-  end
-
-  def move_west
-    top = $top
-    bottom = $bottom
-    east = $east
-    west = $west
-    $west = top
-    $bottom = west
-    $east = bottom
-    $top = east
-  end
-
-  def execute_orders(orders)
-    length = orders.length
-    for i in 0...length
-      if orders[i] == "N"
-        move_north
-      elsif orders[i] == "S"
-        move_south
-      elsif orders[i] == "E"
-        move_east
-      elsif orders[i] == "W"
-        move_west
-      else
-        puts "error!"
-      end
-    end
-  end
-
-  def find_south_by_ne(order_n, order_e)
-    "e = #{order_e}"
+  def find_back_by_fr(order_front, Dorder_right)
     loop do
       tmp = execute_orders(["N", "S", "E", "W"].sample)
-      if $top == order_n && $south == order_e
+      if $top == order_front && $back == order_right
         break
       end
     end
-    return $east
+    return $right
+  end
+
+  private
+  def move_front
+    tmp = $top
+    $top = $back
+    $back = $bottom
+    $bottom = $front
+    $front = tmp
+  end
+
+  def move_back
+    tmp = $back
+    $back = $top
+    $top = $front
+    $front = $bottom
+    $bottom = tmp
+  end
+
+  def move_right
+    tmp = $right
+    $right = $top
+    $top = $left
+    $left = $bottom
+    $bottom = tmp
+  end
+
+  def move_left
+    tmp = $left
+    $left = $top
+    $top = $right
+    $right = $bottom
+    $bottom = tmp
+  end
+
+  def execute_orders(order)
+      if order == "N"
+        move_front
+      elsif order == "S"
+        move_back
+      elsif order == "E"
+        move_right
+      elsif order == "W"
+        move_left
+      else
+        puts "error!"
+      end
   end
 end
 
 dice_number = gets.chomp.split.map(&:to_i)
-t = dice_number[0]
-s = dice_number[1]
-e = dice_number[2]
-w = dice_number[3]
-n = dice_number[4]
-b = dice_number[5]
+top = dice_number[0]
+back = dice_number[1]
+right = dice_number[2]
+left = dice_number[3]
+front = dice_number[4]
+bottom = dice_number[5]
 num = gets.chomp.to_i
 answers = []
 num.times do
-  input_ne = gets.chomp.split.map(&:to_i)
-  order_n = input_ne[0]
-  order_e = input_ne[1]
-  dice = Dice.new(n, s, e, w, t, b)
-  answers << dice.find_south_by_ne(order_n, order_e)
+  input_fr = gets.chomp.split.map(&:to_i)
+  order_front = input_fr[0]
+  order_right = input_fr[1]
+  dice = Dice.new(front, back, right, left, top, bottom)
+  answers << dice.find_back_by_fr(order_front, order_right)
 end
 answers.each do |i|
   puts i
