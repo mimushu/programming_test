@@ -13,6 +13,7 @@ class Dice
     loop do
       tmp = execute_orders(["N", "S", "E", "W"].sample)
       if $top == order_front && $south == order_back
+
         break
       end
     end
@@ -69,6 +70,7 @@ end
 
 
 dice_numbers = gets.chomp.split.map(&:to_i)
+
 num = gets.chomp.to_i
 answers = []
 num.times do
@@ -77,6 +79,7 @@ num.times do
   order_back = input_fb[1]
   dice = Dice.new(dice_numbers)
   answers << dice.find_back_by_fb(order_front, order_back)
+
 end
 answers.each do |i|
   puts i

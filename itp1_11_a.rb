@@ -20,6 +20,7 @@ class Dice
         move_east
       elsif orders[i] == "W"
         move_west
+
       else
         puts "error!"
       end
@@ -73,6 +74,7 @@ class Dice
 
 
 dice_numbers = gets.chomp.split.map(&:to_i)
+
 input_orders = gets.chomp.to_s
 orders = []
 size = input_orders.size
@@ -81,5 +83,6 @@ for i in 0...size
 end
 
 dice = Dice.new(dice_numbers)
+
 dice.execute_orders(orders)
 puts $top

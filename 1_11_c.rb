@@ -18,6 +18,7 @@ class Dice
       100.times do
         execute_orders(["N", "W"].sample)
         return true if $top == order_top && $back == order_back && $right == order_right && $left == order_left && $front == order_front && $bottom == order_bottom
+
       end
     return false
   end
@@ -74,6 +75,7 @@ d1 = gets.chomp.split.map(&:to_i)
 d2 = gets.chomp.split.map(&:to_i)
 dice1 = Dice.new(d1)
 if dice1.check_dices_same(d2)
+
   puts "Yes"
 else
   puts "No"
