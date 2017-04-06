@@ -1,17 +1,24 @@
 class Dice
-  def initialize(top, back, right, left, front, bottom)
-    $front = front
-    $back = back
-    $right = right
-    $left = left
-    $top = top
-    $bottom = bottom
+  def initialize(dice_numbers)
+    $top = dice_numbers[0]
+    $back = dice_numbers[1]
+    $right = dice_numbers[2]
+    $left = dice_numbers[3]
+    $front = dice_numbers[4]
+    $bottom = dice_numbers[5]
   end
 
-  def check_dices_same(order_top, order_back, order_right, order_left, order_front, order_back)
+  def check_dices_same(dice_numbers)
+      order_top = dice_numbers[0]
+      order_back = dice_numbers[1]
+      order_right = dice_numbers[2]
+      order_left = dice_numbers[3]
+      order_front = dice_numbers[4]
+      order_bottom = dice_numbers[5]
       100.times do
         execute_orders(["N", "W"].sample)
-        return true if $top == order_top && $back == order_back && $right == order_right && $left == order_left && $front == order_front && $bottom == order_back
+        return true if $top == order_top && $back == order_back && $right == order_right && $left == order_left && $front == order_front && $bottom == order_bottom
+
       end
     return false
   end
@@ -66,8 +73,9 @@ end
 
 d1 = gets.chomp.split.map(&:to_i)
 d2 = gets.chomp.split.map(&:to_i)
-dice1 = Dice.new(d1[0], d1[1], d1[2], d1[3], d1[4], d1[5])
-if dice1.check_dices_same(d2[0], d2[1], d2[2], d2[3], d2[4], d2[5])
+dice1 = Dice.new(d1)
+if dice1.check_dices_same(d2)
+
   puts "Yes"
 else
   puts "No"

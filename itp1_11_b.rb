@@ -1,17 +1,19 @@
 class Dice
-  def initialize(front, back, right, left, top, bottom)
-    $front = front
-    $back = back
-    $right = right
-    $left = left
-    $top = top
-    $bottom = bottom
+
+  def initialize(dice_numbers)
+    $top = dice_numbers[0]
+    $back = dice_numbers[1]
+    $right = dice_numbers[2]
+    $left = dice_numbers[3]
+    $front = dice_numbers[4]
+    $bottom = dice_numbers[5]
   end
 
-  def find_back_by_fr(order_front, Dorder_right)
+  def find_south_by_fb(order_front, order_back)
     loop do
       tmp = execute_orders(["N", "S", "E", "W"].sample)
-      if $top == order_front && $back == order_right
+      if $top == order_front && $south == order_back
+
         break
       end
     end
@@ -66,21 +68,18 @@ class Dice
   end
 end
 
-dice_number = gets.chomp.split.map(&:to_i)
-top = dice_number[0]
-back = dice_number[1]
-right = dice_number[2]
-left = dice_number[3]
-front = dice_number[4]
-bottom = dice_number[5]
+
+dice_numbers = gets.chomp.split.map(&:to_i)
+
 num = gets.chomp.to_i
 answers = []
 num.times do
   input_fr = gets.chomp.split.map(&:to_i)
-  order_front = input_fr[0]
-  order_right = input_fr[1]
-  dice = Dice.new(front, back, right, left, top, bottom)
-  answers << dice.find_back_by_fr(order_front, order_right)
+  order_front = input_fb[0]
+  order_back = input_fb[1]
+  dice = Dice.new(dice_numbers)
+  answers << dice.find_back_by_fb(order_front, order_back)
+
 end
 answers.each do |i|
   puts i
